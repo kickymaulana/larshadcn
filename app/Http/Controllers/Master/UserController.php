@@ -60,8 +60,6 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        // Load relasi departemen
-        $user->load('departemen');
 
         return Inertia::render('Master/Users/Show', [
             'user' => [
@@ -70,7 +68,6 @@ class UserController extends Controller
                 'username' => $user->username,
                 'email' => $user->email,
                 // Ambil nama departemen jika ada, jika tidak tampilkan 'Tanpa Departemen'
-                'departemen_nama' => $user->departemen->nama ?? 'Tanpa Departemen',
                 'created_at' => $user->created_at->format('Y-m-d H:i:s'),
                 'updated_at' => $user->updated_at->format('Y-m-d H:i:s'),
             ]
@@ -81,7 +78,6 @@ class UserController extends Controller
     {
         return Inertia::render('Master/Users/Edit', [
             'user' => $user,
-            'departemens' => \App\Models\Departemen::select('id', 'nama')->get()
         ]);
     }
 
@@ -92,7 +88,6 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'departemen_id' => ['nullable', 'exists:departemen,id'],
             'password' => ['nullable', 'confirmed', Password::defaults()],
         ]);
 
@@ -100,7 +95,6 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->departemen_id = $request->departemen_id;
 
         // Cek jika password diisi, baru kita update
         if ($request->filled('password')) {

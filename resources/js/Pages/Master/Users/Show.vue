@@ -103,13 +103,6 @@ const formatDate = (dateString: string) => {
                             @{{ user.username }}
                         </p>
 
-                        <Badge
-                            variant="outline"
-                            class="font-medium uppercase italic border-primary/20 bg-primary/5 text-primary"
-                        >
-                            <IconBuildingCommunity class="mr-1.5 size-3" />
-                            {{ user.departemen_nama }}
-                        </Badge>
 
                         <div class="w-full mt-8 flex flex-col gap-2">
                             <Button class="w-full" variant="outline" as-child>
@@ -171,17 +164,6 @@ const formatDate = (dateString: string) => {
                 <Separator />
                 <CardContent class="pt-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-1">
-                            <div
-                                class="flex items-center text-[10px] font-bold uppercase text-muted-foreground gap-2 tracking-wider"
-                            >
-                                <IconBuildingCommunity class="size-3.5" />
-                                <span>Departemen</span>
-                            </div>
-                            <p class="font-semibold uppercase italic">
-                                {{ user.departemen_nama }}
-                            </p>
-                        </div>
 
                         <div class="space-y-1">
                             <div
